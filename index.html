@@ -425,6 +425,18 @@
             margin-top: 30px;
         }
 
+        .export-info {
+            background: rgba(46, 134, 171, 0.1);
+            border: 1px solid rgba(46, 134, 171, 0.2);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--azul-profundo);
+            text-align: center;
+            line-height: 1.5;
+        }
+
         .btn-export {
             background: linear-gradient(135deg, var(--rio-azul), var(--azul-profundo));
             color: white;
@@ -443,6 +455,27 @@
         .btn-export:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(46, 134, 171, 0.3);
+        }
+
+        /* Assinatura do desenvolvedor */
+        .developer-signature {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(108, 117, 125, 0.2);
+        }
+
+        .developer-name {
+            font-size: 0.75rem;
+            color: var(--cinza-tempo);
+            font-weight: 500;
+        }
+
+        .developer-title {
+            font-size: 0.65rem;
+            color: var(--cinza-tempo);
+            font-style: italic;
+            opacity: 0.8;
         }
 
         /* Responsividade */
@@ -564,7 +597,7 @@
             <div class="user-setup">
                 <h2 class="section-title">
                     <i class="fas fa-user-circle" style="color: var(--ouro-mistico); margin-right: 10px;"></i>
-                    Bem-vindo ao seu Oráculo Pessoal
+                    Que bom te receber por aqui. Este é seu Oráculo Pessoal
                 </h2>
                 
                 <div class="privacy-notice">
@@ -575,7 +608,7 @@
 
                 <form class="setup-form" id="setupForm">
                     <div class="form-group">
-                        <label class="form-label" for="userName">Como gostaria de ser chamado?</label>
+                        <label class="form-label" for="userName">Como prefere que eu te chame?</label>
                         <input type="text" class="form-input" id="userName" 
                                placeholder="Pode ser qualquer nome, apelido ou pseudônimo" required>
                     </div>
@@ -624,11 +657,13 @@
                     Sobre os Sonhos
                 </h2>
                 <p style="text-align: center; color: var(--cinza-tempo); line-height: 1.8; font-size: 1.1rem;">
-                    Este é seu espaço sagrado e privado para catalogar e analisar seus sonhos. 
-                    Aqui você pode registrar suas visões noturnas, desejos do futuro e reflexões profundas. 
-                    Como disse Sidarta Ribeiro: <em>"Os desejos são o motor dos sonhos"</em>. 
-                    Explore seus desejos através desta jornada onírica pessoal.
+                    Use este espaço como um caderno de anotações pessoais, até porque os cadernos também são bem vindos e não anulam esta experiência. Na verdade, anotar seus sonhos no caderno ou anotar aqui é uma experiência só. A experiência de materializar suas memórias oníricas. Aqui você pode anotar suas visões noturnas, desejos do futuro e reflexões que chegam em forma de sonho. Por isso é um oráculo. As respostas que você tanto busca podem estar aqui. Como diz Sidarta Ribeiro: <em>"Os desejos são o motor dos sonhos"</em>. Visite seus desejos por meio desta jornada onírica pessoal.
                 </p>
+                
+                <div class="developer-signature">
+                    <div class="developer-name">— Bruno Goulart</div>
+                    <div class="developer-title">desenvolvedor do Repositório de Sonhos</div>
+                </div>
             </section>
 
             <!-- Registrar novo sonho -->
@@ -698,6 +733,13 @@
                     <i class="fas fa-book-open" style="color: var(--ouro-mistico); margin-right: 10px;"></i>
                     Seu Diário de Sonhos
                 </h2>
+                
+                <div class="export-info">
+                    <i class="fas fa-info-circle" style="color: var(--rio-azul); margin-right: 8px;"></i>
+                    <strong>Importante:</strong> Para não perder seus dados ao acessar de outro navegador ou dispositivo, 
+                    exporte seus sonhos em formato JSON. Depois, você pode importar esses dados em qualquer lugar 
+                    e continuar sua jornada onírica com todos os sonhos já registrados.
+                </div>
                 
                 <div class="export-controls">
                     <button class="btn-export" id="exportJSON">
@@ -1075,7 +1117,7 @@
                     dream.type,
                     dream.mood || '',
                     `"${dream.content.replace(/"/g, '""')}"`,
-                    `"${dream.tags || ''}"`
+                    `"${dream.tags || '"}"`
                 ].join(','))
             ].join('\n');
             
@@ -1095,7 +1137,7 @@
                 `REPOSITÓRIO DE SONHOS - ${currentUser.name}`,
                 `Exportado em: ${new Date().toLocaleString('pt-BR')}`,
                 `Total de sonhos: ${dreams.length}`,
-                '=' .repeat(50),
+                '='.repeat(50),
                 '',
                 ...dreams.map(dream => [
                     `SONHO: ${dream.title}`,
@@ -1139,7 +1181,7 @@
                 
                 storage.saveUser(currentUser);
                 showMainApp();
-                showNotification(`Bem-vindo, ${userName}! Sua jornada onírica começou.`, 'success');
+                showNotification(`É um prazer te receber, ${userName}! Sua jornada onírica começou.`, 'success');
             }
         });
 
