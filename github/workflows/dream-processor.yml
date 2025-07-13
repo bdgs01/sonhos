@@ -1,0 +1,12 @@
+# .github/workflows/dream-processor.yml
+name: Process Dreams
+on: [push]
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Python
+      uses: actions/setup-python@v2
+    - name: Run dream analysis
+      run: python scripts/analyze_dreams.py
